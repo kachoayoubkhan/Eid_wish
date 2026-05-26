@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A romantic Eid surprise website with a cinematic love journey.">
+  <meta name="theme-color" content="#0b1712">
+  <title>Moonlit Eid Surprise</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Intro loader for a more cinematic first impression. -->
+  <div class="loading-screen" id="loading-screen" aria-hidden="true">
+    <div class="loader-card">
+      <div class="loader-moon"></div>
+      <p class="loader-title">Preparing a moonlit surprise...</p>
+      <p class="loader-subtitle">A little love journey is on its way.</p>
+    </div>
+  </div>
+
+  <!-- Persistent decorative background: stars, glow, particles, and lanterns. -->
+  <div class="ambient-scene" aria-hidden="true">
+    <div class="scene-glow scene-glow-left"></div>
+    <div class="scene-glow scene-glow-right"></div>
+    <div class="starfield"></div>
+    <div class="floating-particles" id="floating-particles"></div>
+    <div class="lantern lantern-left"></div>
+    <div class="lantern lantern-center"></div>
+    <div class="lantern lantern-right"></div>
+  </div>
+
+  <button
+    class="easter-moon interactive"
+    id="easter-moon"
+    type="button"
+    aria-label="Tap the moon a few times to uncover a hidden message"
+  >
+    <span class="moon-shadow"></span>
+  </button>
+
+  <audio id="bg-music" loop preload="none">
+    <!-- Custom music: replace this path with your own track later if you want. -->
+    <source src="assets/audio/romantic-eid.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-block">
+        <p class="brand-kicker">Moonlit Eid Journey</p>
+        <h1 class="brand-title">For My Favorite Blessing</h1>
+      </div>
+
+      <div class="topbar-tools">
+        <div class="progress-track" id="progress-track" aria-label="Journey progress">
+          <span class="progress-dot is-active">
+            <strong>01</strong>
+            <small>Mystery</small>
+          </span>
+          <span class="progress-dot">
+            <strong>02</strong>
+            <small>Fun</small>
+          </span>
+          <span class="progress-dot">
+            <strong>03</strong>
+            <small>Memories</small>
+          </span>
+          <span class="progress-dot">
+            <strong>04</strong>
+            <small>Reveal</small>
+          </span>
+        </div>
+
+        <button class="sound-button interactive" id="music-toggle" type="button" aria-pressed="false" data-music-toggle>
+          <span class="sound-icon">♫</span>
+          <span class="music-toggle-label">Music Off</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="journey" id="journey">
+      <!-- Stage 1: mystery intro -->
+      <section class="stage is-active" data-stage="1" aria-labelledby="stage-one-title">
+        <div class="stage-panel intro-panel glass-card">
+          <span class="stage-kicker">Stage 1 · The Mysterious Link</span>
+          <div class="ornament-line" aria-hidden="true"></div>
+          <p class="intro-overline">A moonlit delivery has arrived</p>
+          <h2 id="stage-one-title">Someone special sent you something...</h2>
+          <p class="lead-text">
+            This little Eid surprise is hiding smiles, memories, and something from the heart.
+            Open it gently and let the journey unfold.
+          </p>
+
+          <div class="button-row">
+            <button class="primary-button interactive" id="open-carefully" type="button">Open Carefully ❤️</button>
+            <button class="ghost-button interactive" id="ignore-button" type="button">Ignore This 😏</button>
+          </div>
+
+          <p class="micro-note">Hint: the moon above may be hiding a tiny secret.</p>
+        </div>
+      </section>
+
+      <!-- Stage 2: playful questions -->
+      <section class="stage" data-stage="2" aria-labelledby="stage-two-title">
+        <div class="stage-panel glass-card playful-panel">
+          <span class="stage-kicker">Stage 2 · Honest Answers Only</span>
+          <p class="intro-overline">A very serious quiz with very obvious answers</p>
+          <h2 id="stage-two-title">Before entering, answer honestly...</h2>
+          <p class="lead-text">
+            One playful checkpoint first. Answer the little questions below and send your answers to the moon.
+          </p>
+
+          <form class="love-quiz-form" id="love-quiz-form">
+            <div class="choice-grid">
+              <label class="answer-card interactive" for="answer-love">
+                <span class="choice-number">01</span>
+                <span class="choice-copy">Who loves you the most?</span>
+                <input
+                  class="answer-input"
+                  id="answer-love"
+                  name="answerLove"
+                  type="text"
+                  placeholder="Type your answer..."
+                  autocomplete="off"
+                >
+              </label>
+
+              <label class="answer-card interactive" for="answer-misses">
+                <span class="choice-number">02</span>
+                <span class="choice-copy">Who misses you every day?</span>
+                <input
+                  class="answer-input"
+                  id="answer-misses"
+                  name="answerMisses"
+                  type="text"
+                  placeholder="Type your answer..."
+                  autocomplete="off"
+                >
+              </label>
+
+              <label class="answer-card interactive" for="answer-annoys">
+                <span class="choice-number">03</span>
+                <span class="choice-copy">Who annoys you the most?</span>
+                <input
+                  class="answer-input"
+                  id="answer-annoys"
+                  name="answerAnnoys"
+                  type="text"
+                  placeholder="Type your answer..."
+                  autocomplete="off"
+                >
+              </label>
+            </div>
+
+            <div class="button-row quiz-actions">
+              <button class="primary-button interactive" type="submit">Send My Answers ❤️</button>
+            </div>
+          </form>
+
+          <p class="choice-response" id="choice-response" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <!-- Stage 3: memory lane and photo placeholders -->
+      <section class="stage" data-stage="3" aria-labelledby="stage-three-title">
+        <div class="stage-panel glass-card memory-panel">
+          <span class="stage-kicker">Stage 3 · Our Memory Lantern</span>
+          <p class="intro-overline">Where little moments turned into forever feelings</p>
+          <h2 id="stage-three-title">Every moment with you became a beautiful memory...</h2>
+          <p class="lead-text">
+            You gave ordinary days a softer light. With you, even quiet moments feel warm,
+            precious, and worth holding onto forever.
+          </p>
+
+          <blockquote class="romantic-quote">
+            "The calm I ask Allah for always feels a little like you."
+          </blockquote>
+
+          <div class="heart-ribbon" aria-hidden="true">
+            <span>❤</span>
+            <span>❤</span>
+            <span>❤</span>
+            <span>❤</span>
+            <span>❤</span>
+          </div>
+
+          <div class="memory-columns">
+            <div>
+              <div class="section-mini-head">
+                <h3>Love Journey</h3>
+                <p>These are easy to personalize later with your own moments.</p>
+              </div>
+              <div class="memory-timeline" id="memory-timeline"></div>
+            </div>
+
+            <div>
+              <div class="section-mini-head">
+                <h3>Photo Corners</h3>
+                <p>Add your real photos here later when you are ready.</p>
+              </div>
+              <div class="photo-grid" id="photo-grid"></div>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="primary-button interactive" id="surprise-button" type="button">
+              Ready for your Eid surprise? 🌙
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stage 4: romantic Eid reveal -->
+      <section class="stage" data-stage="4" aria-labelledby="stage-four-title">
+        <div class="stage-panel glass-card reveal-panel">
+          <span class="stage-kicker">Final Stage · The Romantic Reveal</span>
+          <p class="intro-overline">A wish written with love, duas, and moonlight</p>
+
+          <h2 class="eid-title" id="stage-four-title">
+            <span class="eid-title-small">For the heart that makes every celebration brighter</span>
+            <span class="eid-title-main">Eid Mubarak</span>
+          </h2>
+
+          <div class="reveal-orbit" aria-hidden="true">
+            <span class="orbit-star"></span>
+            <span class="orbit-star"></span>
+            <span class="orbit-star"></span>
+          </div>
+
+          <div class="typewriter-card">
+            <!-- Custom text: edit the message string in script.js later if you want to personalize it. -->
+            <p class="typewriter-text" id="typed-message" aria-live="polite"></p>
+          </div>
+
+          <div class="final-actions">
+            <button class="primary-button interactive" id="replay-button" type="button">Replay Journey</button>
+            <button class="ghost-button interactive" id="music-toggle-inline" type="button" aria-pressed="false" data-music-toggle>
+              <span class="sound-icon">♫</span>
+              <span class="music-toggle-label">Play Music</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="final-heart-burst" id="final-heart-burst" aria-hidden="true"></div>
+        <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card glass-card">
+      <p class="modal-tag" id="modal-title">Tiny Plot Twist</p>
+      <p class="modal-text" id="modal-text">Nice try 😌 You still have to continue.</p>
+      <button class="primary-button interactive" id="modal-button" type="button">Continue</button>
+    </div>
+  </div>
+
+  <div class="answer-popup hidden" id="answer-popup" role="dialog" aria-modal="true" aria-labelledby="answer-popup-title">
+    <div class="answer-popup-card glass-card">
+      <div class="keepsake-heading">
+        <div>
+          <p class="keepsake-kicker">Your Love Notes</p>
+          <h3 id="answer-popup-title">Questions and answers, wrapped in moonlight</h3>
+        </div>
+        <p class="keepsake-tip">Take a screenshot of this and send it to me on WhatsApp ❤️</p>
+      </div>
+
+      <div class="answer-keepsake-grid" id="answer-keepsake-grid"></div>
+
+      <div class="button-row answer-popup-actions">
+        <button class="primary-button interactive" id="answer-popup-button" type="button">Continue to Our Memories 🌙</button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="secret-note hidden" id="secret-note" aria-live="polite"></aside>
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <noscript>
+    <div class="noscript-banner">
+      This surprise needs JavaScript for the animated journey. Please enable it to see the full experience.
+    </div>
+  </noscript>
+
+  <script src="script.js"></script>
+</body>
+</html>
