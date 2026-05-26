@@ -1,4 +1,8 @@
-# Moonlit Eid Surprise
+# Eid_wish
+
+This is a 4-step Eid wish I built for my wife.
+
+## Moonlit Eid Surprise
 
 This project is a responsive romantic Eid website built with plain HTML, CSS, and JavaScript. It is designed as a four-stage mini love journey:
 
