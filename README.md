@@ -17,7 +17,7 @@ This project is a responsive romantic Eid website built with plain HTML, CSS, an
 - `style.css` - animations, responsive layout, glassmorphism styling, and decorative effects
 - `script.js` - stage transitions, typewriter message, music toggle, loading screen, particles, and easter egg
 - `assets/audio/` - place your custom background music here
-- `assets/images/` - place your photos here if you want to swap the placeholders later
+- `assets/images/` - place your photos here using names like `photo-1.jpg`, `photo-2.jpg`, `photo-3.jpg`, and `photo-4.jpg`
 
 ## Folder structure
 
@@ -44,7 +44,7 @@ Open `script.js` and edit the `journeyContent` object near the top:
 - `finalMessage` controls the final typed Eid message
 - `secretMessage` controls the hidden moon easter egg
 - `memories` controls the memory cards on stage 3
-- `photoSlots` controls the labels for the placeholder photo cards
+- `photoSlots` controls the gallery captions, image file names, and fallback placeholder cards
 
 ### Add your music
 
@@ -53,11 +53,11 @@ Open `script.js` and edit the `journeyContent` object near the top:
 
 ### Add your photos
 
-The current photo area uses elegant placeholders. To replace them with real images:
+The current photo area automatically checks for your images. To replace the placeholders:
 
 1. Put your image files in `assets/images/`
-2. Open `script.js`
-3. Replace each generated placeholder card in `populateMemoryCards()` with an `<img>` tag or a styled background image card
+2. Name them like `photo-1.jpg`, `photo-2.jpg`, `photo-3.jpg`, and `photo-4.jpg`
+3. If you want different file names or captions, edit the `photoSlots` array in `script.js`
 
 ## Deploy to GitHub Pages
 

@@ -26,20 +26,52 @@ const journeyContent = {
   ],
   photoSlots: [
     {
-      title: "Add your favorite selfie",
-      note: "Perfect for your cutest Eid or date-night photo."
+      title: "Our Sweetest Selfie",
+      note: "Add this as photo-1.* for a first beautiful impression.",
+      badge: "Photo 01",
+      alt: "A favorite photo together",
+      sources: [
+        "assets/images/photo-1.jpg",
+        "assets/images/photo-1.jpeg",
+        "assets/images/photo-1.png",
+        "assets/images/photo-1.webp"
+      ]
     },
     {
-      title: "Add a special memory",
-      note: "Use a picture from a trip, dinner, or a sweet little moment."
+      title: "A Special Memory",
+      note: "Use photo-2.* for a dinner date, trip, or quiet little moment.",
+      badge: "Photo 02",
+      alt: "A special shared memory",
+      sources: [
+        "assets/images/photo-2.jpg",
+        "assets/images/photo-2.jpeg",
+        "assets/images/photo-2.png",
+        "assets/images/photo-2.webp"
+      ]
     },
     {
-      title: "Add your moonlit moment",
-      note: "A calm photo together fits beautifully here."
+      title: "Our Moonlit Moment",
+      note: "Use photo-3.* for a soft, calm picture together.",
+      badge: "Photo 03",
+      alt: "A calm moonlit moment together",
+      sources: [
+        "assets/images/photo-3.jpg",
+        "assets/images/photo-3.jpeg",
+        "assets/images/photo-3.png",
+        "assets/images/photo-3.webp"
+      ]
     },
     {
-      title: "Add your forever frame",
-      note: "A final picture to make the reveal feel even more personal."
+      title: "Our Forever Frame",
+      note: "Use photo-4.* for one last favorite memory.",
+      badge: "Photo 04",
+      alt: "A final favorite photo together",
+      sources: [
+        "assets/images/photo-4.jpg",
+        "assets/images/photo-4.jpeg",
+        "assets/images/photo-4.png",
+        "assets/images/photo-4.webp"
+      ]
     }
   ],
   quizQuestions: [
@@ -106,10 +138,25 @@ function populateMemoryCards() {
   const photoMarkup = journeyContent.photoSlots
     .map(
       (slot) => `
-        <article class="photo-slot">
-          <span class="photo-slot-icon">✦</span>
-          <strong>${slot.title}</strong>
-          <p>${slot.note}</p>
+        <article class="photo-card" data-photo-card>
+          <div class="photo-shell">
+            <img
+              class="photo-image"
+              data-photo-image
+              alt="${escapeHtml(slot.alt)}"
+              loading="lazy"
+            >
+            <span class="photo-badge">${escapeHtml(slot.badge)}</span>
+            <div class="photo-caption">
+              <strong>${escapeHtml(slot.title)}</strong>
+              <p>${escapeHtml(slot.note)}</p>
+            </div>
+            <div class="photo-fallback">
+              <span class="photo-slot-icon">✦</span>
+              <strong>${escapeHtml(slot.title)}</strong>
+              <p>${escapeHtml(slot.note)}</p>
+            </div>
+          </div>
         </article>
       `
     )
@@ -143,6 +190,52 @@ function renderAnswerKeepsake() {
     .join("");
 
   answerKeepsakeGrid.innerHTML = keepsakeMarkup;
+}
+
+function loadPhotoSource(source) {
+  return new Promise((resolve) => {
+    const testImage = new Image();
+
+    testImage.onload = () => resolve(source);
+    testImage.onerror = () => resolve(null);
+    testImage.src = source;
+  });
+}
+
+async function findFirstAvailablePhoto(sources) {
+  for (const source of sources) {
+    const resolvedSource = await loadPhotoSource(source);
+
+    if (resolvedSource) {
+      return resolvedSource;
+    }
+  }
+
+  return null;
+}
+
+// Drop photos into assets/images and the gallery will pick them up automatically.
+async function hydratePhotoGallery() {
+  const photoCards = [...document.querySelectorAll("[data-photo-card]")];
+
+  for (const [index, card] of photoCards.entries()) {
+    const slot = journeyContent.photoSlots[index];
+    const imageElement = card.querySelector("[data-photo-image]");
+
+    if (!slot || !imageElement) {
+      continue;
+    }
+
+    const resolvedSource = await findFirstAvailablePhoto(slot.sources);
+
+    if (!resolvedSource) {
+      card.classList.remove("has-image");
+      continue;
+    }
+
+    imageElement.src = resolvedSource;
+    card.classList.add("has-image");
+  }
 }
 
 // Ambient particles keep the page feeling alive even when idle.
@@ -454,3 +547,4 @@ createAmbientParticles();
 attachMicroInteractions();
 updateMusicButtons();
 hideLoadingScreen();
+hydratePhotoGallery();
