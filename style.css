@@ -1232,9 +1232,13 @@ body.stage-4-active .easter-moon::before {
 
 @media (max-width: 699px) {
   .easter-moon {
-    top: 1.35rem;
-    right: 1rem;
-    width: 5.2rem;
+    top: 1rem;
+    right: 0.75rem;
+    width: 4rem;
+  }
+
+  .moon-shadow {
+    inset: -10%;
   }
 
   .lantern {

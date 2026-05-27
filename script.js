@@ -332,15 +332,47 @@ async function toggleMusic() {
   }
 
   try {
+    if (backgroundMusic.readyState === 0) {
+      backgroundMusic.load();
+    }
+
+    backgroundMusic.volume = 0.85;
     await backgroundMusic.play();
     state.musicPlaying = true;
     updateMusicButtons();
   } catch (error) {
     state.musicPlaying = false;
     updateMusicButtons();
-    showToast("The soundtrack could not start automatically. Tap the music button to try again.");
+
+    if (backgroundMusic.error) {
+      showToast("This audio file could not be played here. Converting it to MP3 usually fixes it.");
+      return;
+    }
+
+    showToast("The soundtrack is blocked until a tap is recognized. Tap the music button once more.");
   }
 }
+
+backgroundMusic.addEventListener("play", () => {
+  state.musicPlaying = true;
+  updateMusicButtons();
+});
+
+backgroundMusic.addEventListener("pause", () => {
+  state.musicPlaying = false;
+  updateMusicButtons();
+});
+
+backgroundMusic.addEventListener("ended", () => {
+  state.musicPlaying = false;
+  updateMusicButtons();
+});
+
+backgroundMusic.addEventListener("error", () => {
+  state.musicPlaying = false;
+  updateMusicButtons();
+  showToast("This browser could not decode the music file. Converting it to MP3 is the safest fix.");
+});
 
 function clearTyping() {
   window.clearInterval(state.typingTimer);
