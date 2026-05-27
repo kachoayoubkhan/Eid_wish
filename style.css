@@ -768,7 +768,7 @@ blockquote {
 
 .memory-columns {
   display: grid;
-  gap: 1.2rem;
+  gap: 1rem;
   margin-top: 1.8rem;
 }
 
@@ -796,40 +796,6 @@ blockquote {
   font-size: 0.88em;
 }
 
-.memory-timeline {
-  display: grid;
-  gap: 0.95rem;
-}
-
-.memory-card {
-  position: relative;
-  padding: 1rem 1rem 1rem 1.25rem;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 233, 167, 0.12);
-}
-
-.memory-card::before {
-  content: "";
-  position: absolute;
-  top: 1.15rem;
-  left: 0.55rem;
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 50%;
-  background: var(--gold-strong);
-  box-shadow: 0 0 12px rgba(255, 221, 150, 0.4);
-}
-
-.memory-card h4 {
-  font-size: 1.1rem;
-}
-
-.memory-card p {
-  margin-top: 0.45rem;
-  color: var(--text-soft);
-}
-
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -838,11 +804,6 @@ blockquote {
 
 .photo-card {
   min-height: 11.5rem;
-}
-
-.photo-card:first-child {
-  grid-column: span 2;
-  min-height: 14rem;
 }
 
 .photo-shell {
@@ -898,10 +859,6 @@ blockquote {
   padding: 1rem;
   text-align: center;
   transition: opacity 240ms ease, transform 240ms ease;
-}
-
-.photo-card:first-child .photo-fallback {
-  min-height: 14rem;
 }
 
 .photo-card.has-image .photo-fallback {
@@ -1242,7 +1199,7 @@ body.stage-4-active .easter-moon::before {
   }
 
   .memory-columns {
-    grid-template-columns: 1.06fr 0.94fr;
+    grid-template-columns: 1fr;
     align-items: start;
   }
 
@@ -1269,7 +1226,7 @@ body.stage-4-active .easter-moon::before {
   }
 
   .photo-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -1298,14 +1255,8 @@ body.stage-4-active .easter-moon::before {
     grid-template-columns: 1fr;
   }
 
-  .photo-card:first-child {
-    grid-column: span 1;
-    min-height: 11.5rem;
-  }
-
   .photo-card,
-  .photo-fallback,
-  .photo-card:first-child .photo-fallback {
+  .photo-fallback {
     min-height: 11.5rem;
   }
 
@@ -1325,7 +1276,6 @@ body.stage-4-active .easter-moon::before {
   }
 
   .answer-keepsake-item,
-  .memory-card,
   .photo-fallback,
   .photo-caption {
     padding: 0.95rem;

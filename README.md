@@ -17,7 +17,7 @@ This project is a responsive romantic Eid website built with plain HTML, CSS, an
 - `style.css` - animations, responsive layout, glassmorphism styling, and decorative effects
 - `script.js` - stage transitions, typewriter message, music toggle, loading screen, particles, and easter egg
 - `assets/audio/` - place your custom background music here
-- `assets/images/` - place your photos here using names like `photo-1.jpg`, `photo-2.jpg`, `photo-3.jpg`, and `photo-4.jpg`
+- `assets/images/` - place your photos here using names like `photo-1.jpg` through `photo-6.jpg`
 
 ## Folder structure
 
@@ -49,14 +49,14 @@ Open `script.js` and edit the `journeyContent` object near the top:
 ### Add your music
 
 1. Put your song file in `assets/audio/`
-2. Rename it to `romantic-eid.mp3` or change the `<source>` path in `index.html`
+2. Rename it to `music.webm` or change the `<source>` path in `index.html`
 
 ### Add your photos
 
 The current photo area automatically checks for your images. To replace the placeholders:
 
 1. Put your image files in `assets/images/`
-2. Name them like `photo-1.jpg`, `photo-2.jpg`, `photo-3.jpg`, and `photo-4.jpg`
+2. Name them like `photo-1.jpg` through `photo-6.jpg`
 3. If you want different file names or captions, edit the `photoSlots` array in `script.js`
 
 ## Deploy to GitHub Pages

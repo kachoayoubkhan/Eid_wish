@@ -39,8 +39,7 @@
   </button>
 
   <audio id="bg-music" loop preload="none">
-    <!-- Custom music: replace this path with your own track later if you want. -->
-    <source src="assets/audio/romantic-eid.mp3" type="audio/mpeg">
+    <source src="assets/audio/music.webm" type="audio/webm">
   </audio>
 
   <div class="app-shell">
@@ -81,7 +80,6 @@
       <!-- Stage 1: mystery intro -->
       <section class="stage is-active" data-stage="1" aria-labelledby="stage-one-title">
         <div class="stage-panel intro-panel glass-card">
-          <span class="stage-kicker">Stage 1 · The Mysterious Link</span>
           <div class="ornament-line" aria-hidden="true"></div>
           <p class="intro-overline">A moonlit delivery has arrived</p>
           <h2 id="stage-one-title">Someone special sent you something...</h2>
@@ -102,7 +100,6 @@
       <!-- Stage 2: playful questions -->
       <section class="stage" data-stage="2" aria-labelledby="stage-two-title">
         <div class="stage-panel glass-card playful-panel">
-          <span class="stage-kicker">Stage 2 · Honest Answers Only</span>
           <p class="intro-overline">A very serious quiz with very obvious answers</p>
           <h2 id="stage-two-title">Before entering, answer honestly...</h2>
           <p class="lead-text">
@@ -163,7 +160,6 @@
       <!-- Stage 3: memory lane and photo placeholders -->
       <section class="stage" data-stage="3" aria-labelledby="stage-three-title">
         <div class="stage-panel glass-card memory-panel">
-          <span class="stage-kicker">Stage 3 · Our Memory Lantern</span>
           <p class="intro-overline">Where little moments turned into forever feelings</p>
           <h2 id="stage-three-title">Every moment with you became a beautiful memory...</h2>
           <p class="lead-text">
@@ -186,16 +182,7 @@
           <div class="memory-columns">
             <div>
               <div class="section-mini-head">
-                <h3>Love Journey</h3>
-                <p>These are easy to personalize later with your own moments.</p>
-              </div>
-              <div class="memory-timeline" id="memory-timeline"></div>
-            </div>
-
-            <div>
-              <div class="section-mini-head">
                 <h3>Photo Corners</h3>
-                <p>Drop photos into <code>assets/images</code> as <code>photo-1</code>, <code>photo-2</code>, <code>photo-3</code>, and <code>photo-4</code>.</p>
               </div>
               <div class="photo-grid" id="photo-grid"></div>
             </div>
@@ -212,7 +199,6 @@
       <!-- Stage 4: romantic Eid reveal -->
       <section class="stage" data-stage="4" aria-labelledby="stage-four-title">
         <div class="stage-panel glass-card reveal-panel">
-          <span class="stage-kicker">Final Stage · The Romantic Reveal</span>
           <p class="intro-overline">A wish written with love, duas, and moonlight</p>
 
           <h2 class="eid-title" id="stage-four-title">

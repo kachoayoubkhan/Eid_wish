@@ -3,31 +3,17 @@ const journeyContent = {
   finalMessage: [
     "Eid Mubarak, Anila Zehra, My Love ❤️",
     "",
-    "Every Eid becomes more beautiful because you are in my life.",
+    "Every Moment becomes more beautiful because you are in my life.",
     "You are my peace, my happiness, and my favorite blessing.",
     "Thank you for making my world beautiful.",
     "",
     "May Allah always keep us together forever. 🌙✨"
   ].join("\n"),
   secretMessage: "Secret unlocked: I would choose you in every lifetime, every Eid, every prayer.",
-  memories: [
-    {
-      title: "The first warm smile",
-      text: "That sweet feeling when even a normal day suddenly feels lighter because you are in it."
-    },
-    {
-      title: "Shared duas and quiet laughs",
-      text: "The kind of peace that settles in when love, friendship, and prayer all feel like the same home."
-    },
-    {
-      title: "A forever made of little things",
-      text: "Tea, conversations, late-night jokes, Eid excitement, and all the ordinary moments that became precious."
-    }
-  ],
   photoSlots: [
     {
       title: "Our Sweetest Selfie",
-      note: "Add this as photo-1.* for a first beautiful impression.",
+      note: "",
       badge: "Photo 01",
       alt: "A favorite photo together",
       sources: [
@@ -39,7 +25,7 @@ const journeyContent = {
     },
     {
       title: "A Special Memory",
-      note: "Use photo-2.* for a dinner date, trip, or quiet little moment.",
+      note: "",
       badge: "Photo 02",
       alt: "A special shared memory",
       sources: [
@@ -51,7 +37,7 @@ const journeyContent = {
     },
     {
       title: "Our Moonlit Moment",
-      note: "Use photo-3.* for a soft, calm picture together.",
+      note: "",
       badge: "Photo 03",
       alt: "A calm moonlit moment together",
       sources: [
@@ -63,7 +49,7 @@ const journeyContent = {
     },
     {
       title: "Our Forever Frame",
-      note: "Use photo-4.* for one last favorite memory.",
+      note: "",
       badge: "Photo 04",
       alt: "A final favorite photo together",
       sources: [
@@ -71,6 +57,30 @@ const journeyContent = {
         "assets/images/photo-4.jpeg",
         "assets/images/photo-4.png",
         "assets/images/photo-4.webp"
+      ]
+    },
+    {
+      title: "My Favorite Smile",
+      note: "",
+      badge: "Photo 05",
+      alt: "A favorite smiling photo together",
+      sources: [
+        "assets/images/photo-5.jpg",
+        "assets/images/photo-5.jpeg",
+        "assets/images/photo-5.png",
+        "assets/images/photo-5.webp"
+      ]
+    },
+    {
+      title: "One More Forever",
+      note: "",
+      badge: "Photo 06",
+      alt: "One more cherished photo together",
+      sources: [
+        "assets/images/photo-6.jpg",
+        "assets/images/photo-6.jpeg",
+        "assets/images/photo-6.png",
+        "assets/images/photo-6.webp"
       ]
     }
   ],
@@ -100,7 +110,6 @@ const musicButtons = [...document.querySelectorAll("[data-music-toggle]")];
 
 const loadingScreen = document.getElementById("loading-screen");
 const floatingParticles = document.getElementById("floating-particles");
-const memoryTimeline = document.getElementById("memory-timeline");
 const photoGrid = document.getElementById("photo-grid");
 const answerKeepsakeGrid = document.getElementById("answer-keepsake-grid");
 const typedMessage = document.getElementById("typed-message");
@@ -122,19 +131,8 @@ const finalHeartBurst = document.getElementById("final-heart-burst");
 const toast = document.getElementById("toast");
 const backgroundMusic = document.getElementById("bg-music");
 
-// Build the editable memory and photo placeholder content.
-function populateMemoryCards() {
-  const memoryMarkup = journeyContent.memories
-    .map(
-      (memory) => `
-        <article class="memory-card">
-          <h4>${memory.title}</h4>
-          <p>${memory.text}</p>
-        </article>
-      `
-    )
-    .join("");
-
+// Build the editable photo gallery content.
+function populatePhotoGallery() {
   const photoMarkup = journeyContent.photoSlots
     .map(
       (slot) => `
@@ -149,12 +147,12 @@ function populateMemoryCards() {
             <span class="photo-badge">${escapeHtml(slot.badge)}</span>
             <div class="photo-caption">
               <strong>${escapeHtml(slot.title)}</strong>
-              <p>${escapeHtml(slot.note)}</p>
+              ${slot.note ? `<p>${escapeHtml(slot.note)}</p>` : ""}
             </div>
             <div class="photo-fallback">
               <span class="photo-slot-icon">✦</span>
               <strong>${escapeHtml(slot.title)}</strong>
-              <p>${escapeHtml(slot.note)}</p>
+              ${slot.note ? `<p>${escapeHtml(slot.note)}</p>` : ""}
             </div>
           </div>
         </article>
@@ -162,7 +160,6 @@ function populateMemoryCards() {
     )
     .join("");
 
-  memoryTimeline.innerHTML = memoryMarkup;
   photoGrid.innerHTML = photoMarkup;
 }
 
@@ -341,7 +338,7 @@ async function toggleMusic() {
   } catch (error) {
     state.musicPlaying = false;
     updateMusicButtons();
-    showToast("Add your song in assets/audio/romantic-eid.mp3 to enable the soundtrack.");
+    showToast("The soundtrack could not start automatically. Tap the music button to try again.");
   }
 }
 
@@ -541,7 +538,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-populateMemoryCards();
+populatePhotoGallery();
 renderAnswerKeepsake();
 createAmbientParticles();
 attachMicroInteractions();
